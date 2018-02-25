@@ -31,27 +31,24 @@ class App extends Component {
 //Function selects cards and modifies the state when button is clicked
     dealHand() {
       let fullDeck = shuffledDeck();
-      let cards = fullDeck.splice(0,5)
+      let newCards = fullDeck.splice(0,5)
       this.setState ({
-        hand: [cards[0], cards[1], cards[2], cards[3], cards[4]]
+        hand: [newCards[0], newCards[1], newCards[2], newCards[3], newCards[4]]
       })
     }
 
     render() {
 //Creates array of image locations.
-      let cardImages = [];
+      let cards = [];
       for (var i = 0; i < 5; i++) {
-        cardImages.push("http://golearntocode.com/images/cards/" + this.state.hand[i] + ".png")
+        let image = "http://golearntocode.com/images/cards/"+this.state.hand[i]+".png"
+        cards.push(<img src = {image} />)
       };
-//Takes array of image locations and converts to array of image objects.
-      let images = cardImages.map(function(image) {
-        return (<img src={image} />);
-      });
 //Returns array of images and changes array when button is clicked.
       return (
         <div className="App">
           <h1>
-            {images}
+            {cards}
           </h1>
           <p><button onClick={() => this.dealHand()}>Deal a hand</button></p>
         </div>
